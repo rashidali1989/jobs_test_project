@@ -1,0 +1,288 @@
+{
+  "info": {
+    "name": "Job Creation API",
+    "description": "API collection for testing job/listing creation, updates, and management endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000/api",
+      "type": "string"
+    },
+    {
+      "key": "job_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Jobs",
+      "item": [
+        {
+          "name": "Create Job",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"Property\",\n  \"status\": 1,\n  \"method_of_access\": 1,\n  \"access_details\": \"Keysafe code: 1234\",\n  \"listing_agent\": \"John Smith\",\n  \"occupant_name\": \"Jane Doe\",\n  \"occupant_mobile\": \"+61412345678\",\n  \"access_other\": \"Contact agent for access\",\n  \"package\": \"Standard Package\",\n  \"requested_datetime\": \"2024-01-15T10:00:00Z\",\n  \"property\": {\n    \"unit\": \"2A\",\n    \"street_number\": \"123\",\n    \"street_name\": \"Main Street\",\n    \"suburb\": \"Sydney\",\n    \"state\": \"NSW\",\n    \"postcode\": \"2000\",\n    \"country\": \"Australia\",\n    \"bedrooms\": 3,\n    \"bathrooms\": 2,\n    \"levels\": 1,\n    \"land_size\": 500.00,\n    \"house_size\": 150.00\n  },\n  \"products\": [\"PROD001\", \"PROD002\"],\n  \"assigned_team_members\": [\"TM001\", \"TM002\"],\n  \"contacts\": [\"CONT001\", \"CONT002\"]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/jobs/",
+              "host": ["{{base_url}}"],
+              "path": ["jobs", ""]
+            },
+            "description": "Create a new job/listing with property details and associated resources"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Jobs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/jobs/",
+              "host": ["{{base_url}}"],
+              "path": ["jobs", ""]
+            },
+            "description": "Retrieve all jobs/listings"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Job by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/jobs/{{job_id}}/",
+              "host": ["{{base_url}}"],
+              "path": ["jobs", "{{job_id}}", ""]
+            },
+            "description": "Retrieve a specific job by its ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Job (Full)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"Commercial\",\n  \"status\": 2,\n  \"method_of_access\": 2,\n  \"access_details\": \"Agent will provide access\",\n  \"listing_agent\": \"Sarah Johnson\",\n  \"occupant_name\": \"Mike Wilson\",\n  \"occupant_mobile\": \"+61487654321\",\n  \"access_other\": \"\",\n  \"package\": \"Premium Package\",\n  \"requested_datetime\": \"2024-01-16T14:30:00Z\",\n  \"property\": {\n    \"unit\": \"5B\",\n    \"street_number\": \"456\",\n    \"street_name\": \"Business Avenue\",\n    \"suburb\": \"Melbourne\",\n    \"state\": \"VIC\",\n    \"postcode\": \"3000\",\n    \"country\": \"Australia\",\n    \"bedrooms\": 5,\n    \"bathrooms\": 3,\n    \"levels\": 2,\n    \"land_size\": 800.00,\n    \"house_size\": 250.00\n  },\n  \"products\": [\"PROD003\", \"PROD004\"],\n  \"assigned_team_members\": [\"TM003\"],\n  \"contacts\": [\"CONT003\"]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/jobs/{{job_id}}/",
+              "host": ["{{base_url}}"],
+              "path": ["jobs", "{{job_id}}", ""]
+            },
+            "description": "Update a job completely (PUT method)"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Job (Partial)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": 3,\n  \"access_details\": \"Updated access details\",\n  \"package\": \"Updated Package\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/jobs/{{job_id}}/",
+              "host": ["{{base_url}}"],
+              "path": ["jobs", "{{job_id}}", ""]
+            },
+            "description": "Partially update a job (PATCH method)"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Job",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/jobs/{{job_id}}/",
+              "host": ["{{base_url}}"],
+              "path": ["jobs", "{{job_id}}", ""]
+            },
+            "description": "Delete a job by its ID"
+          },
+          "response": []
+        }
+      ],
+      "description": "Job management endpoints"
+    },
+    {
+      "name": "Sample Data",
+      "item": [
+        {
+          "name": "Create Sample Job - Property",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"Property\",\n  \"status\": 1,\n  \"method_of_access\": 1,\n  \"access_details\": \"Keysafe code: 5678\",\n  \"listing_agent\": \"Alice Brown\",\n  \"occupant_name\": \"Bob Green\",\n  \"occupant_mobile\": \"+61411111111\",\n  \"access_other\": \"\",\n  \"package\": \"Basic Package\",\n  \"requested_datetime\": \"2024-01-17T09:00:00Z\",\n  \"property\": {\n    \"unit\": \"\",\n    \"street_number\": \"789\",\n    \"street_name\": \"Oak Lane\",\n    \"suburb\": \"Brisbane\",\n    \"state\": \"QLD\",\n    \"postcode\": \"4000\",\n    \"country\": \"Australia\",\n    \"bedrooms\": 4,\n    \"bathrooms\": 2,\n    \"levels\": 1,\n    \"land_size\": 600.00,\n    \"house_size\": 180.00\n  },\n  \"products\": [\"PROD001\"],\n  \"assigned_team_members\": [\"TM001\"],\n  \"contacts\": [\"CONT001\"]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/jobs/",
+              "host": ["{{base_url}}"],
+              "path": ["jobs", ""]
+            },
+            "description": "Create a sample property job"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Sample Job - Commercial",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"Commercial\",\n  \"status\": 2,\n  \"method_of_access\": 2,\n  \"access_details\": \"Agent will meet on site\",\n  \"listing_agent\": \"David Wilson\",\n  \"occupant_name\": \"\",\n  \"occupant_mobile\": \"\",\n  \"access_other\": \"Security clearance required\",\n  \"package\": \"Commercial Package\",\n  \"requested_datetime\": \"2024-01-18T11:00:00Z\",\n  \"property\": {\n    \"unit\": \"Suite 10\",\n    \"street_number\": \"100\",\n    \"street_name\": \"Corporate Drive\",\n    \"suburb\": \"Perth\",\n    \"state\": \"WA\",\n    \"postcode\": \"6000\",\n    \"country\": \"Australia\",\n    \"bedrooms\": 0,\n    \"bathrooms\": 2,\n    \"levels\": 1,\n    \"land_size\": 1000.00,\n    \"house_size\": 500.00\n  },\n  \"products\": [\"PROD002\", \"PROD003\"],\n  \"assigned_team_members\": [\"TM002\", \"TM003\"],\n  \"contacts\": [\"CONT002\", \"CONT003\"]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/jobs/",
+              "host": ["{{base_url}}"],
+              "path": ["jobs", ""]
+            },
+            "description": "Create a sample commercial job"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Sample Job - Industrial",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"Industrial\",\n  \"status\": 1,\n  \"method_of_access\": 3,\n  \"access_details\": \"Occupant will provide access\",\n  \"listing_agent\": \"Emma Davis\",\n  \"occupant_name\": \"Frank Miller\",\n  \"occupant_mobile\": \"+61422222222\",\n  \"access_other\": \"Hard hat required\",\n  \"package\": \"Industrial Package\",\n  \"requested_datetime\": \"2024-01-19T13:00:00Z\",\n  \"property\": {\n    \"unit\": \"\",\n    \"street_number\": \"200\",\n    \"street_name\": \"Industrial Way\",\n    \"suburb\": \"Adelaide\",\n    \"state\": \"SA\",\n    \"postcode\": \"5000\",\n    \"country\": \"Australia\",\n    \"bedrooms\": 0,\n    \"bathrooms\": 1,\n    \"levels\": 1,\n    \"land_size\": 2000.00,\n    \"house_size\": 800.00\n  },\n  \"products\": [\"PROD004\"],\n  \"assigned_team_members\": [\"TM001\"],\n  \"contacts\": [\"CONT001\"]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/jobs/",
+              "host": ["{{base_url}}"],
+              "path": ["jobs", ""]
+            },
+            "description": "Create a sample industrial job"
+          },
+          "response": []
+        }
+      ],
+      "description": "Sample data for testing different job types"
+    },
+    {
+      "name": "Error Testing",
+      "item": [
+        {
+          "name": "Create Job - Invalid Data",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"InvalidType\",\n  \"status\": 5,\n  \"method_of_access\": 10,\n  \"access_details\": \"\",\n  \"listing_agent\": \"\",\n  \"requested_datetime\": \"invalid-date\",\n  \"property\": {\n    \"street_number\": \"\",\n    \"street_name\": \"\",\n    \"suburb\": \"\",\n    \"postcode\": \"\",\n    \"bedrooms\": -1,\n    \"bathrooms\": -1,\n    \"levels\": -1,\n    \"land_size\": -100,\n    \"house_size\": -50\n  },\n  \"products\": [],\n  \"assigned_team_members\": [],\n  \"contacts\": []\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/jobs/",
+              "host": ["{{base_url}}"],
+              "path": ["jobs", ""]
+            },
+            "description": "Test error handling with invalid data"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Non-existent Job",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/jobs/99999/",
+              "host": ["{{base_url}}"],
+              "path": ["jobs", "99999", ""]
+            },
+            "description": "Test 404 error for non-existent job"
+          },
+          "response": []
+        }
+      ],
+      "description": "Error handling test cases"
+    }
+  ],
+  "event": [
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Auto-extract job ID from create response",
+          "if (pm.response.code === 201 && pm.info.requestName === 'Create Job') {",
+          "    const response = pm.response.json();",
+          "    if (response.id) {",
+          "        pm.collectionVariables.set('job_id', response.id);",
+          "        console.log('Job ID set to:', response.id);",
+          "    }",
+          "}",
+          "",
+          "// Test response structure",
+          "pm.test('Response has correct structure', function () {",
+          "    const response = pm.response.json();",
+          "    pm.expect(response).to.have.property('id');",
+          "    pm.expect(response).to.have.property('type');",
+          "    pm.expect(response).to.have.property('status');",
+          "});",
+          "",
+          "// Test status codes",
+          "pm.test('Status code is correct', function () {",
+          "    const validCodes = [200, 201, 204, 400, 404];",
+          "    pm.expect(pm.response.code).to.be.oneOf(validCodes);",
+          "});"
+        ]
+      }
+    }
+  ]
+} 
